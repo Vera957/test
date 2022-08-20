@@ -1,16 +1,24 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+import React from "react";
+import { Searchbar } from "./Searchbar/Searchbar";
+import '../styles/style.css';
+import { Component } from "react";
+import { ImageGallery } from './ImageGallery/ImageGallery';
+
+
+export class App extends Component {
+  state = {
+    search: '',
+  }
+
+  newSearch = (val) => {
+    this.setState({ search: val });
+  }
+
+  render() {
+    return (
+    <div className="App">
+        <Searchbar onSubmit={this.newSearch} />
+        {this.state.search !== '' && <ImageGallery search={this.state.search} />}
     </div>
-  );
+  );}
 };
