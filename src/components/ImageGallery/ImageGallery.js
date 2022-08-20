@@ -72,10 +72,8 @@ export class ImageGallery extends Component {
         }
     }
 
-
     render() {
         const { total, page, idle, pending, rejected, resolved, modal, largeImageURL, list } = this.state;
-        console.log(modal)
         return (<>
             {modal === true &&
                 <Modal toggleModal={this.toggleModal} >
@@ -101,3 +99,5 @@ export class ImageGallery extends Component {
         </>)
     }
 }
+
+//no propTypes

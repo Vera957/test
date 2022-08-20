@@ -3,6 +3,8 @@ import React from "react";
 import { Component } from "react";
 import "styles/style.css";
 import { FcBinoculars } from "react-icons/fc";
+import propTypes from 'prop-types';
+
 export class Searchbar extends Component {
     state = {
         search: ''
@@ -19,7 +21,6 @@ export class Searchbar extends Component {
     }
 
     render() {
-
         return (
             <header className="Searchbar">
                 <form className="SearchForm" onSubmit={this.addSearch} >
@@ -40,4 +41,6 @@ export class Searchbar extends Component {
     }
 }
 
-//BsSearch
+Searchbar.propTypes = {
+    onSubmit: propTypes.func,
+}

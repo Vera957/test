@@ -22,3 +22,5 @@ export class App extends Component {
     </div>
   );}
 };
+
+//no props

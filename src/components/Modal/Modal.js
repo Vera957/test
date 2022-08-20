@@ -1,4 +1,5 @@
 import { Component } from "react";
+import propTypes from 'prop-types';
 
 export class Modal extends Component {
 
@@ -11,7 +12,6 @@ export class Modal extends Component {
     }
 
     handleKeyDown = (e) => {
-        console.log(e.target.nodeName)
                 if (e.code === 'Escape' && e.target.nodeName === 'BODY') {
             return this.props.toggleModal();
         }
@@ -24,7 +24,6 @@ export class Modal extends Component {
     }
 
     render() {
-        console.log(this.props.children)
         return (<>
             <div className="Overlay" onClick={this.handleBackdrop}>
                 <div className="Modal">
@@ -33,4 +32,9 @@ export class Modal extends Component {
             </div>
         </>)
     }
+}
+
+Modal.propTypes = {
+    children: propTypes.any,
+    toggleModal: propTypes.func,
 }
