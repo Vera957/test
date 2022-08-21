@@ -65,10 +65,10 @@ export class ImageGallery extends Component {
             page: prev.page + 1,
         }))
     }
-    toggleModal = (e) => {
+    toggleModal = (url) => {
         this.setState(({ modal }) => ({ modal: !modal}))
-        if (e !== undefined && e.target.nodeName === "IMG") {
-            this.setState({ largeImageURL: e.target.dataset.lUrl })
+        if (url !== undefined ) {
+            this.setState({ largeImageURL: url })
         }
     }
 
@@ -84,7 +84,7 @@ export class ImageGallery extends Component {
             {idle === true && <p className="Notification">Not found</p>}
             {rejected === true && alert("Server don't answer")}
             {resolved === true && (<>
-                <ul className='ImageGallery' onClick={this.toggleModal}>
+                <ul className='ImageGallery' onClick={(e) => this.toggleModal(e.target.dataset.lUrl)}>
                     {list.map(e => <ImageGalleryItem
                         key={e.id}
                         item={e.webformatURL}
