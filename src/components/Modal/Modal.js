@@ -8,7 +8,7 @@ export class Modal extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleKeyDown)
+        window.removeEventListener('keydown', this.handleKeyDown);      
     }
 
     handleKeyDown = (e) => {

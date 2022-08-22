@@ -16,7 +16,7 @@ export class App extends Component {
 
   render() {
     return (
-    <div className="App">
+    <div className="App" id='up'>
         <Searchbar onSubmit={this.newSearch} />
         {this.state.search !== '' && <ImageGallery search={this.state.search} />}
     </div>

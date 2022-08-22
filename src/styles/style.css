@@ -82,12 +82,6 @@ img {
   width: 48px;
   height: 48px;
   border: 0;
-  /*background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.1;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);*/
   cursor: pointer;
   outline: none;
 }
@@ -220,6 +214,7 @@ img {
   margin-right: auto;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    position: relative;
 }
 
 .Button:hover,
@@ -268,4 +263,31 @@ img {
 
 .Notification {
   text-align: center;
+}
+
+/*arrow*/
+
+.FcLeftUp2 {
+  transform: scale(1.5);
+}
+
+.FcLeftUp2:hover, .FcLeftUp2:focus{
+  transform: scale(2);
+}
+
+.ArrowUp {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+  display: block;
+  padding: 10px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  text-decoration: none;
+}
+
+.ContainerEndOfPage{
+  position: relative;
+  display: flex;
 }

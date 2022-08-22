@@ -4,6 +4,8 @@ import { KEY } from '../Helpers';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Loader } from "components/Loader/Loader";
 import { Modal } from 'components/Modal/Modal';
+import { FcLeftUp2 } from "react-icons/fc";
+
 
 export class ImageGallery extends Component {
     state = {
@@ -59,15 +61,15 @@ export class ImageGallery extends Component {
             .catch(error => {
                 this.setState({ rejected: true, pending: false })
             });
-    }  
+    }
     changePage = () => {
         this.setState(prev => ({
             page: prev.page + 1,
         }))
     }
     toggleModal = (url) => {
-        this.setState(({ modal }) => ({ modal: !modal}))
-        if (url !== undefined ) {
+        this.setState(({ modal }) => ({ modal: !modal }))
+        if (url !== undefined) {
             this.setState({ largeImageURL: url })
         }
     }
@@ -77,24 +79,28 @@ export class ImageGallery extends Component {
         return (<>
             {modal === true &&
                 <Modal toggleModal={this.toggleModal} >
-                <img src={largeImageURL} alt="" />
+                    <img src={largeImageURL} alt="" />
                 </Modal>
             }
-            {pending === true && <Loader/>}
+            {pending === true && <Loader />}
             {idle === true && <p className="Notification">Not found</p>}
             {rejected === true && alert("Server don't answer")}
             {resolved === true && (<>
-                <ul className='ImageGallery' onClick={(e) => this.toggleModal(e.target.dataset.lUrl)}>
+                <ul className='ImageGallery' id='up' onClick={(e) => 
+                    e.target !== e.currentTarget && this.toggleModal(e.target.dataset.lUrl)}>
                     {list.map(e => <ImageGalleryItem
                         key={e.id}
                         item={e.webformatURL}
                         url={e.largeImageURL}
-                         />)}
+                    />)}
                 </ul>
-                {total > page && <button
-                    type="button"
-                    className="Button"
-                    onClick={this.changePage}>Load more</button>}
+                {total > page && <div className="ContainerEndOfPage">
+                    <button
+                        type="button"
+                        className="Button"
+                        onClick={this.changePage}>Load more</button>
+                    <a href="#up" className="ArrowUp" target_blanck='true' > <FcLeftUp2 className="FcLeftUp2" /></a>
+                </div>}
             </>)}
         </>)
     }
