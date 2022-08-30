@@ -1,17 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import "styles/style.css";
 import propTypes from "prop-types"
+//import { Modal } from "components/Modal/Modal";
 
 
-export class ImageGalleryItem extends Component {
-    render() {
-        return (<>
-            <li className="ImageGalleryItem" >
-                <img src={this.props.item} alt="" className="ImageGalleryItem-image" data-l-url={this.props.url} />
-            </li>
-        </>
+export const ImageGalleryItem = ({ url, tag, largeImageURL }) => {
+    
+    return (<div>
+            <img src={url} className="ImageGalleryItem-image" alt={tag}  data-url={largeImageURL} />
+        </div>
         )
-    }
 }
 
 ImageGalleryItem.propTypes = {

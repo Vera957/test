@@ -1,26 +1,67 @@
 import React from "react";
 import { Searchbar } from "./Searchbar/Searchbar";
 import '../styles/style.css';
-import { Component } from "react";
-import { ImageGallery } from './ImageGallery/ImageGallery';
+//import { ImageGallery } from './ImageGallery/ImageGallery';
+import { useState, useEffect } from "react";
+import { response } from "./Helpers";
+import { ImageGallery } from "./ImageGallery/ImageGallery";
+import { Modal } from "./Modal/Modal";
+import { Loader } from "./Loader/Loader";
+import "styles/style.css";
 
 
-export class App extends Component {
-  state = {
-    search: '',
+
+export const App = () => {
+  const [search, setsearch] = useState('');
+  const [page, setpage] = useState(1);
+  const [dataPage, setdataPage] = useState([]);
+  const [lastPage, setlastPage] = useState(null);
+  const [pending, setpending] = useState(false);
+  const [modal, setmodal] = useState(false);
+  const [largeIMG, setlargeIMG] = useState(undefined);
+  //const [responseData, setresponseData] = useState([]);
+
+
+  useEffect(() => {// answer from server data and last page
+    if (search === '') return;
+    setpending(true);
+    response(search, page).then((response) => {
+      const { hits } = response;
+      //setresponseData(response);
+      setlastPage(Math.ceil(response.totalHits / 12));
+      setpending(false);
+      if (page > 1) {
+        setdataPage(prev => ([...prev, ...hits]))
+      } else {
+        setdataPage(hits);
+      }
+    }).catch(console.error);
+  }, [search, page]);
+
+  const getVal = (queue) => {
+    setsearch(queue);
   }
 
-  newSearch = (val) => {
-    this.setState({ search: val });
-  }
+  const nextPage = () => setpage(prev => prev + 1);//set next page event
 
-  render() {
-    return (
+  const toggleModal = (e) => {//img for modal
+    if (!modal && e.target.nodeName !== 'IMG') return;
+    if (!modal && e.target.nodeName === 'IMG') {
+      setmodal(!modal)
+      setlargeIMG(e.target.dataset.url);
+    } else if (modal && !e.target) setmodal(!modal);
+  };
+
+  return (<>
+    {pending && (<Loader />)}
+    {modal && (<Modal toggleModal={toggleModal} ><img src={largeIMG} alt="" /></Modal>)}
     <div className="App" id='up'>
-        <Searchbar onSubmit={this.newSearch} />
-        {this.state.search !== '' && <ImageGallery search={this.state.search} />}
+      <Searchbar onSubmit={getVal} />
     </div>
-  );}
+    {dataPage.length > 0 && (<ImageGallery data={dataPage} toggleModal={toggleModal} />)}
+    {page !== lastPage && search !== '' && dataPage.length>0 && !pending && (<button type="button" className='Button' onClick={nextPage}>Load more...</button>)}
+  </>
+  )
 };
 
 //no props
