@@ -53,11 +53,10 @@ export const App = () => {
   };
 
   return (<>
+    <Searchbar onSubmit={getVal} />
     {pending && (<Loader />)}
-    {modal && (<Modal toggleModal={toggleModal} ><img src={largeIMG} alt="" /></Modal>)}
-    <div className="App" id='up'>
-      <Searchbar onSubmit={getVal} />
-    </div>
+    {modal && (<Modal toggleModal={toggleModal} ><img src={largeIMG} alt="" /></Modal>)} 
+    {dataPage.length === 0 && search !== '' && (<p className="Notification">no matches found</p>)}
     {dataPage.length > 0 && (<ImageGallery data={dataPage} toggleModal={toggleModal} />)}
     {page !== lastPage && search !== '' && dataPage.length>0 && !pending && (<button type="button" className='Button' onClick={nextPage}>Load more...</button>)}
   </>
