@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import propTypes from 'prop-types';
-import "styles/style.css";
-
 
 export const Modal = (props) => {
 
@@ -11,7 +9,7 @@ export const Modal = (props) => {
                 return props.toggleModal(false);
             }
         };
-        window.addEventListener('keydown', handleKeyDown)
+        window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         }

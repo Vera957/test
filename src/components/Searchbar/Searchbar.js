@@ -8,8 +8,6 @@ import propTypes from 'prop-types';
 
 export const Searchbar = (props) => {
 
-    //const [inputValue, setinputValue] = useState('')
-
     const search = (e) => {
         e.preventDefalult();
     }

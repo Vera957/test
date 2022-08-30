@@ -1,6 +1,4 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
-import "styles/style.css";
-
 
 export const ImageGallery = (props) => {
 

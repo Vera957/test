@@ -1,13 +1,9 @@
-import React from "react";
 import { Searchbar } from "./Searchbar/Searchbar";
-import '../styles/style.css';
-//import { ImageGallery } from './ImageGallery/ImageGallery';
 import { useState, useEffect } from "react";
 import { response } from "./Helpers";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Modal } from "./Modal/Modal";
 import { Loader } from "./Loader/Loader";
-import "styles/style.css";
 
 
 
